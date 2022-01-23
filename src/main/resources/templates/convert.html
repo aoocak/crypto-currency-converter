@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Cryptocurrency Converter</h1>
+
+<form action="#" th:object="${requestDTO}" th:action="@{/convert}" method="get">
+    <select th:field="*{coinSymbol}">
+        <option value="BTC">BTC</option>
+        <option value="ETH">ETH</option>
+        <option value="TRX">TRX</option>
+        <option value="SLP">SLP</option>
+    </select>
+    <br><br>
+    Ip: <input type="text" th:field="*{ipAddress}"/>
+    <br><br>
+    <input type="submit" value="Convert">
+</form>
+
+<p th:text="'Current unit price is: '"><br>
+<p th:text="${responseDTO.getPrice()}">
+
+</body>
+</html>
