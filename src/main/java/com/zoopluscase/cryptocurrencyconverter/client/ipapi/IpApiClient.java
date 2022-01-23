@@ -41,14 +41,11 @@ public class IpApiClient {
 
         CloseableHttpResponse response = client.execute(request);
 
-        String response_content;
-        try {
-            HttpEntity entity = response.getEntity();
-            response_content = EntityUtils.toString(entity);
-            EntityUtils.consume(entity);
-        } finally {
-            response.close();
-        }
+        HttpEntity entity = response.getEntity();
+        String response_content = EntityUtils.toString(entity);
+        EntityUtils.consume(entity);
+
+        response.close();
 
         GeoLocation geoLocation = objectMapper.readValue(response_content, GeoLocation.class);
 

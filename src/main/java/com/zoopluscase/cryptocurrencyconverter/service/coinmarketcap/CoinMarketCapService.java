@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 public class CoinMarketCapService {
 
+    public static final String UNIT_AMOUNT = "1";
     private final CoinMarketCapClient coinMarketCapClient;
 
 
@@ -30,10 +31,9 @@ public class CoinMarketCapService {
         }
 
         List<NameValuePair> parameters = getParameters(coinSymbol, fiatSymbol);
-
         CoinMarketCapResponseDTO coinMarketCapResponseDTO = coinMarketCapClient.convertCoinToFiat(parameters);
-
         Currency currency = coinMarketCapResponseDTO.getData().getQuote().getCurrencyMap().get(fiatSymbol);
+
         return currency.getPrice();
     }
 
@@ -41,7 +41,7 @@ public class CoinMarketCapService {
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("symbol", coinSymbol));
         parameters.add(new BasicNameValuePair("convert", fiatSymbol));
-        parameters.add(new BasicNameValuePair("amount", "1"));
+        parameters.add(new BasicNameValuePair("amount", UNIT_AMOUNT));
         return parameters;
     }
 }

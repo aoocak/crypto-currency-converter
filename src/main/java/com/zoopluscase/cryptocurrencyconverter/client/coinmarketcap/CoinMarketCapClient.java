@@ -23,6 +23,7 @@ public class CoinMarketCapClient {
 
     private static final String APPLICATION_JSON_HEADER = "application/json";
     private static final String API_KEY_KEY = "X-CMC_PRO_API_KEY";
+    public static final int SUCCESS_CLIENT_CODE = 0;
     private final String coinMarketCapConversionEndpoint;
     private final String coinMarketCapApiKey;
     private final ObjectMapper objectMapper;
@@ -48,18 +49,16 @@ public class CoinMarketCapClient {
 
         CloseableHttpResponse response = client.execute(request);
 
-        String response_content = "";
-        try {
-            HttpEntity entity = response.getEntity();
-            response_content = EntityUtils.toString(entity);
-            EntityUtils.consume(entity);
-        } finally {
-            response.close();
-        }
+        HttpEntity entity = response.getEntity();
+        String response_content = EntityUtils.toString(entity);
+        EntityUtils.consume(entity);
+
+        response.close();
+
 
         CoinMarketCapResponseDTO coinMarketCapResponseDTO = objectMapper.readValue(response_content, CoinMarketCapResponseDTO.class);
 
-        if (coinMarketCapResponseDTO.getStatus().getErrorCode() != 0) {
+        if (SUCCESS_CLIENT_CODE != coinMarketCapResponseDTO.getStatus().getErrorCode()) {
             throw new CoinMarketCapClientException(coinMarketCapResponseDTO.getStatus().getErrorMessage());
         }
 
