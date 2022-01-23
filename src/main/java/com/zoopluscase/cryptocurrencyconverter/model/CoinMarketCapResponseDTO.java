@@ -5,29 +5,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Data;
 
 import javax.annotation.Generated;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties
 @JsonPropertyOrder({
-        "country_code",
-        "languages",
+    "status",
+    "data"
 })
-
 @Generated("jsonschema2pojo")
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Data
-public class GeoLocation {
-    @JsonProperty("languages")
-    public String languages;
+@lombok.Data
+public class CoinMarketCapResponseDTO {
 
-    @JsonProperty("country_code")
-    public String countryCode;
+    @JsonProperty("status")
+    private Status status;
+    @JsonProperty("data")
+    private Data data;
 
-    @JsonProperty("error")
-    public boolean error;
-
-    @JsonProperty("reason")
-    public String reason;
 }

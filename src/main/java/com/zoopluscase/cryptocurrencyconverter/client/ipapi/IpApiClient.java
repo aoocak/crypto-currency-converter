@@ -1,4 +1,4 @@
-package com.zoopluscase.cryptocurrencyconverter.client;
+package com.zoopluscase.cryptocurrencyconverter.client.ipapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zoopluscase.cryptocurrencyconverter.model.GeoLocation;
@@ -6,17 +6,16 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-@Component
+@Service
 public class IpApiClient {
 
     private final String ipApiEndpoint;
@@ -32,7 +31,7 @@ public class IpApiClient {
     }
 
 
-    public GeoLocation getGeoLocation(String ipAddress) throws URISyntaxException, IOException {
+    public GeoLocation getGeoLocation(String ipAddress) throws URISyntaxException, IOException, IpApiClientException {
 
         URIBuilder query = new URIBuilder(ipApiEndpoint);
         query.setPath(ipAddress + geoLocationFormatPath);
@@ -42,14 +41,18 @@ public class IpApiClient {
 
         CloseableHttpResponse response = client.execute(request);
 
-        String response_content;
-        try {
-            HttpEntity entity = response.getEntity();
-            response_content = EntityUtils.toString(entity);
-            EntityUtils.consume(entity);
-        } finally {
-            response.close();
+        HttpEntity entity = response.getEntity();
+        String response_content = EntityUtils.toString(entity);
+        EntityUtils.consume(entity);
+
+        response.close();
+
+        GeoLocation geoLocation = objectMapper.readValue(response_content, GeoLocation.class);
+
+        if (geoLocation.isError()) {
+            throw new IpApiClientException(geoLocation.getReason());
         }
-        return objectMapper.readValue(response_content, GeoLocation.class);
+
+        return geoLocation;
     }
 }
