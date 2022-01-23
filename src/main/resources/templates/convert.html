@@ -21,6 +21,7 @@
 </form>
 
 <div th:if="${error}">
+    <p th:text="'Error: '">
     <p th:text="${error}">
 </div>
 <div th:unless="${error}">
