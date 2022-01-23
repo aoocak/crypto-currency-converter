@@ -1,5 +1,6 @@
 package com.zoopluscase.cryptocurrencyconverter.service;
 
+import com.zoopluscase.cryptocurrencyconverter.client.IpApiClient;
 import com.zoopluscase.cryptocurrencyconverter.model.ConvertRequestDTO;
 import com.zoopluscase.cryptocurrencyconverter.model.ConvertResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,8 @@ class CryptoCurrencyConversionServiceTest {
 
     @BeforeEach
     public void setUp() {
-        cryptoCurrencyConversionService = new CryptoCurrencyConversionService();
+        IpApiClient ipApiClient = new IpApiClient("","",null);
+        cryptoCurrencyConversionService = new CryptoCurrencyConversionService(ipApiClient);
     }
 
     @Test
