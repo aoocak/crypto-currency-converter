@@ -1,10 +1,10 @@
 package com.zoopluscase.cryptocurrencyconverter.service;
 
-import com.zoopluscase.cryptocurrencyconverter.client.IpApiClient;
 import com.zoopluscase.cryptocurrencyconverter.model.ConvertRequestDTO;
 import com.zoopluscase.cryptocurrencyconverter.model.ConvertResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,12 +14,16 @@ class CryptoCurrencyConversionServiceTest {
 
     private CryptoCurrencyConversionService cryptoCurrencyConversionService;
 
-    //mocks clients
+    @Mock
+    private CoinMarketCapService coinMarketCapService;
+
+    @Mock
+    private IpApiService ipApiService;
+
 
     @BeforeEach
     public void setUp() {
-        IpApiClient ipApiClient = new IpApiClient("","",null);
-        cryptoCurrencyConversionService = new CryptoCurrencyConversionService(ipApiClient);
+        cryptoCurrencyConversionService = new CryptoCurrencyConversionService(coinMarketCapService, ipApiService);
     }
 
     @Test
