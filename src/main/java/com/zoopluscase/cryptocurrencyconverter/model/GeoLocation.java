@@ -24,4 +24,10 @@ public class GeoLocation {
 
     @JsonProperty("country_code")
     public String countryCode;
+
+    @JsonProperty("error")
+    public boolean error;
+
+    @JsonProperty("reason")
+    public String reason;
 }

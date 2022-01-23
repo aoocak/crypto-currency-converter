@@ -6,7 +6,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -32,7 +31,7 @@ public class IpApiClient {
     }
 
 
-    public GeoLocation getGeoLocation(String ipAddress) throws URISyntaxException, IOException {
+    public GeoLocation getGeoLocation(String ipAddress) throws URISyntaxException, IOException, IpApiClientException {
 
         URIBuilder query = new URIBuilder(ipApiEndpoint);
         query.setPath(ipAddress + geoLocationFormatPath);
@@ -50,6 +49,13 @@ public class IpApiClient {
         } finally {
             response.close();
         }
-        return objectMapper.readValue(response_content, GeoLocation.class);
+
+        GeoLocation geoLocation = objectMapper.readValue(response_content, GeoLocation.class);
+
+        if (geoLocation.isError()) {
+            throw new IpApiClientException(geoLocation.getReason());
+        }
+
+        return geoLocation;
     }
 }

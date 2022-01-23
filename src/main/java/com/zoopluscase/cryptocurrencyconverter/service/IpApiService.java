@@ -1,6 +1,7 @@
 package com.zoopluscase.cryptocurrencyconverter.service;
 
 import com.zoopluscase.cryptocurrencyconverter.client.IpApiClient;
+import com.zoopluscase.cryptocurrencyconverter.client.IpApiClientException;
 import com.zoopluscase.cryptocurrencyconverter.model.GeoLocation;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class IpApiService {
         this.ipApiClient = ipApiClient;
     }
 
-    public GeoLocation getGeoLocation(String ipAddress) throws URISyntaxException, IOException {
+    public GeoLocation getGeoLocation(String ipAddress) throws URISyntaxException, IOException, IpApiClientException {
         GeoLocation geoLocation = ipApiClient.getGeoLocation(ipAddress);
         return geoLocation;
     }
