@@ -1,4 +1,4 @@
-package com.zoopluscase.cryptocurrencyconverter.client;
+package com.zoopluscase.cryptocurrencyconverter.client.ipapi;
 
 public class IpApiClientException extends Exception {
 

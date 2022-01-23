@@ -1,10 +1,14 @@
 package com.zoopluscase.cryptocurrencyconverter.service;
 
-import com.zoopluscase.cryptocurrencyconverter.client.CoinMarketCapClientException;
-import com.zoopluscase.cryptocurrencyconverter.client.IpApiClientException;
+import com.zoopluscase.cryptocurrencyconverter.client.coinmarketcap.CoinMarketCapClientException;
+import com.zoopluscase.cryptocurrencyconverter.client.ipapi.IpApiClientException;
 import com.zoopluscase.cryptocurrencyconverter.model.ConvertRequestDTO;
 import com.zoopluscase.cryptocurrencyconverter.model.ConvertResponseDTO;
 import com.zoopluscase.cryptocurrencyconverter.model.GeoLocation;
+import com.zoopluscase.cryptocurrencyconverter.service.coinmarketcap.CoinMarketCapService;
+import com.zoopluscase.cryptocurrencyconverter.service.coinmarketcap.CoinMarketCapServiceException;
+import com.zoopluscase.cryptocurrencyconverter.service.ipapi.IpApiService;
+import com.zoopluscase.cryptocurrencyconverter.service.ipapi.IpApiValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

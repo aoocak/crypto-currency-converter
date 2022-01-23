@@ -1,7 +1,7 @@
-package com.zoopluscase.cryptocurrencyconverter.service;
+package com.zoopluscase.cryptocurrencyconverter.service.ipapi;
 
-import com.zoopluscase.cryptocurrencyconverter.client.IpApiClient;
-import com.zoopluscase.cryptocurrencyconverter.client.IpApiClientException;
+import com.zoopluscase.cryptocurrencyconverter.client.ipapi.IpApiClient;
+import com.zoopluscase.cryptocurrencyconverter.client.ipapi.IpApiClientException;
 import com.zoopluscase.cryptocurrencyconverter.model.GeoLocation;
 import org.springframework.stereotype.Service;
 

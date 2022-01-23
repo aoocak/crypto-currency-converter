@@ -1,7 +1,7 @@
-package com.zoopluscase.cryptocurrencyconverter.service;
+package com.zoopluscase.cryptocurrencyconverter.service.coinmarketcap;
 
-import com.zoopluscase.cryptocurrencyconverter.client.CoinMarketCapClient;
-import com.zoopluscase.cryptocurrencyconverter.client.CoinMarketCapClientException;
+import com.zoopluscase.cryptocurrencyconverter.client.coinmarketcap.CoinMarketCapClient;
+import com.zoopluscase.cryptocurrencyconverter.client.coinmarketcap.CoinMarketCapClientException;
 import com.zoopluscase.cryptocurrencyconverter.model.CoinMarketCapResponseDTO;
 import com.zoopluscase.cryptocurrencyconverter.model.Currency;
 import org.apache.commons.lang3.StringUtils;

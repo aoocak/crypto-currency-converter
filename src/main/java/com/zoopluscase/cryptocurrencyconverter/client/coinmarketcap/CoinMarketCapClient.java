@@ -1,4 +1,4 @@
-package com.zoopluscase.cryptocurrencyconverter.client;
+package com.zoopluscase.cryptocurrencyconverter.client.coinmarketcap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zoopluscase.cryptocurrencyconverter.model.CoinMarketCapResponseDTO;

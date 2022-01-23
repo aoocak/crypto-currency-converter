@@ -1,4 +1,4 @@
-package com.zoopluscase.cryptocurrencyconverter.client;
+package com.zoopluscase.cryptocurrencyconverter.client.coinmarketcap;
 
 public class CoinMarketCapClientException extends Exception {
 

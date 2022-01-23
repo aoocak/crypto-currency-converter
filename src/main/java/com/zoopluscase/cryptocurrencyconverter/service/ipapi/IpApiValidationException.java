@@ -1,4 +1,4 @@
-package com.zoopluscase.cryptocurrencyconverter.service;
+package com.zoopluscase.cryptocurrencyconverter.service.ipapi;
 
 public class IpApiValidationException extends Exception {
 
