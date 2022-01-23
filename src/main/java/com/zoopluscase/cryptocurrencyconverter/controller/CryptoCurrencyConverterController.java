@@ -26,8 +26,7 @@ public class CryptoCurrencyConverterController {
     }
 
     @GetMapping("/convert")
-    public String convert(@ModelAttribute ConvertRequestDTO requestDTO, HttpServletRequest httpServletRequest, Model model)
-            throws IpApiClientException, CoinMarketCapClientException, IpApiValidationException, URISyntaxException, IOException, CoinMarketCapServiceException {
+    public String convert(@ModelAttribute ConvertRequestDTO requestDTO, HttpServletRequest httpServletRequest, Model model) {
 
         model.addAttribute("requestDTO", requestDTO);
         ConvertResponseDTO responseDTO = new ConvertResponseDTO();
@@ -38,9 +37,13 @@ public class CryptoCurrencyConverterController {
             return "convert";
         }
 
-        responseDTO = cryptoCurrencyConversionService.convertCryptoCurrency(requestDTO, httpServletRequest);
+        try {
+            responseDTO = cryptoCurrencyConversionService.convertCryptoCurrency(requestDTO, httpServletRequest);
+            model.addAttribute("responseDTO", responseDTO);
+        } catch (IpApiClientException | CoinMarketCapClientException | IpApiValidationException | URISyntaxException | IOException | CoinMarketCapServiceException e) {
+            model.addAttribute("error", e.getMessage());
+        }
 
-        model.addAttribute("responseDTO", responseDTO);
         return "convert";
     }
 }
